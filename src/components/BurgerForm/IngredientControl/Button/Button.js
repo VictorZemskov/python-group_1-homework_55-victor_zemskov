@@ -2,7 +2,8 @@ import React from 'react'
 
 function Button(props) {
     return <div className="buttons">
-        <button className="button" disabled={props.isAddButtonDisabled} type="submit" onClick={props.OnRemoveIngredient}>Less</button>
+        {console.log(props.onRemoveIngredient)}
+        <button className="button" disabled={props.isAddButtonDisabled} type="submit" onClick={() => {return props.onRemoveIngredient(props.name)}}>Less</button>
         <button className="button" type="submit" onClick={props.OnAddIngredient}>More</button>
     </div>
 }

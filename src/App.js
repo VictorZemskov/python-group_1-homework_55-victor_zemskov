@@ -14,7 +14,7 @@ const availableIngredients = {
 class App extends Component {
   state = {
     ingredients: {
-      salad: {count: 0, total: 0},
+      salad: {count: 2, total: 0},
       cheese: {count: 2, total: 0},
       meat: {count: 2, total: 0},
       bacon: {count: 2, total: 0},
@@ -40,7 +40,8 @@ class App extends Component {
     if(ingredient.count > 0) {
       ingredient.count -= 1;
     }
-    ingredient.total = ingredient.count * availableIngredients[name.price];
+    ingredient.total = ingredient.count * availableIngredients[name].price;
+    console.log(ingredient.count * availableIngredients[name].price, 'test')
 
     let ingredients = {...this.state.ingredients};
     ingredients[name] = ingredient;
@@ -56,6 +57,7 @@ class App extends Component {
                  this.state.ingredients.cheese.total +
                  this.state.ingredients.meat.total +
                  this.state.ingredients.bacon.total ;
+    console.log(this.state)
     return result;
   };
 
@@ -70,10 +72,12 @@ class App extends Component {
           <Burger ingrediets={this.state.ingredients}/>
           <div className="panel">
             <div className="TotalPrice">Current Price:<b> {this.getTotal()} soms</b></div>
+
             <BurgerForm
-                onRemoveIngredient={ () => this.removeIngredient()}
-                onAddIngredient={ () => this.addIngredient()}
-                isAddButtonDisabled={this.addButtonDisabled()}
+                onRemoveIngredient={this.removeIngredient}
+                onAddIngredient={ () => this.addIngredient}
+                isAddButtonDisabled={this.addButtonDisabled}
+                ingredients = {availableIngredients}
             />
           </div>
       </div>

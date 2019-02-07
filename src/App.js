@@ -14,17 +14,17 @@ const availableIngredients = {
 class App extends Component {
   state = {
     ingredients: {
-      salad: {count: 2, total: 0},
-      cheese: {count: 2, total: 0},
-      meat: {count: 2, total: 0},
-      bacon: {count: 2, total: 0},
+      salad: {count: 0, total: 0},
+      cheese: {count: 0, total: 0},
+      meat: {count: 0, total: 0},
+      bacon: {count: 0, total: 0},
     }
   };
 
   addIngredient = (name) => {
     let ingredient = {...this.state.ingredients[name]};
     ingredient.count += 1;
-    ingredient.total = ingredient.count * availableIngredients[name.price];
+    ingredient.total = ingredient.count * availableIngredients[name].price;
 
     let ingredients = {...this.state.ingredients};
     ingredients[name] = ingredient;
@@ -75,7 +75,7 @@ class App extends Component {
 
             <BurgerForm
                 onRemoveIngredient={this.removeIngredient}
-                onAddIngredient={ () => this.addIngredient}
+                onAddIngredient={this.addIngredient}
                 isAddButtonDisabled={this.addButtonDisabled}
                 ingredients = {availableIngredients}
             />
